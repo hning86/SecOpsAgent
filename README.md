@@ -33,7 +33,7 @@ To balance performance and reliability, the access token caching logic uses a pr
 - Python 3.13+
 - [uv](https://docs.astral.sh/uv/) for package management.
 - Google Cloud CLI (`gcloud`) configured with appropriate permissions.
-- Access to a Google Cloud Project with Vertex AI enabled (`secops-dev-488519` by default).
+- Access to a Google Cloud Project with Vertex AI enabled (Note: the agent code currently defaults to a specific internal project ID).
 
 ## Installation & Setup
 
@@ -52,7 +52,7 @@ To balance performance and reliability, the access token caching logic uses a pr
    Ensure you have configured your default active project and are authenticated.
    ```bash
    gcloud auth application-default login
-   gcloud config set project secops-dev-488519
+   gcloud config set project <YOUR_GCP_PROJECT_ID>
    ```
 
 ## Local Development
@@ -71,7 +71,7 @@ The project contains a `deploy.sh` script to configure and deploy the agent to G
 
 1. Create a `.env` file in the root directory:
    ```env
-   GOOGLE_CLOUD_PROJECT=secops-dev-488519
+   GOOGLE_CLOUD_PROJECT=<YOUR_GCP_PROJECT_ID>
    GOOGLE_CLOUD_LOCATION=us-central1
    ```
 
