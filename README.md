@@ -33,7 +33,7 @@ To balance performance and reliability, the access token caching logic uses a pr
 - Python 3.13+
 - [uv](https://docs.astral.sh/uv/) for package management.
 - Google Cloud CLI (`gcloud`) configured with appropriate permissions.
-- Access to a Google Cloud Project with Vertex AI enabled (Note: the agent code currently defaults to a specific internal project ID).
+- Access to a Google Cloud Project with both **Vertex AI** and the **Chronicle MCP Server** enabled (Note: the agent code currently defaults to a specific internal project ID).
 
 ## Installation & Setup
 
