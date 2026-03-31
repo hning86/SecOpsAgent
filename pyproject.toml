@@ -1,0 +1,15 @@
+[project]
+name = "SecOpsAgent"
+version = "0.1.0"
+description = "Security Operations Agent"
+readme = "README.md"
+requires-python = ">=3.13"
+dependencies = [
+    "google-adk>=1.26.0",
+    "python-dotenv>=1.2.2",
+    "opentelemetry-exporter-gcp-trace",
+    "opentelemetry-instrumentation-google-genai>=0.7b0",
+]
+
+[[tool.uv.index]]
+url = "https://pypi.org/simple"
