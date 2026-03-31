@@ -65,6 +65,15 @@ uv run python client.py
 
 This will run predefined user queries against the SecOps Agent and stream back the assistant's responses.
 
+### Example Queries
+
+When interacting with the agent, you can ask questions that leverage both your integrated Google SecOps (Chronicle) environment and general threat intelligence via Google Search. Here are some examples:
+
+- *"Can you search Chronicle for any notable events involving the IP address `10.0.0.52`?"*
+- *"Are there any newly reported vulnerabilities (CVEs) for Apache Struts today? If so, follow up by checking if we have any related logs in Chronicle."*
+- *"Summarize the latest high-severity security alerts from SecOps for the past 24 hours."*
+- *"What are the standard mitigation steps for a 'Golden Ticket' active directory attack?"*
+
 ## Deployment
 
 The project contains a `deploy.sh` script to configure and deploy the agent to Google Cloud Agent Engine. It relies on the environment variables defined in a `.env` file.
