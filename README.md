@@ -12,6 +12,16 @@ The agent leverages **Vertex AI Gemini 2.5 Flash** for fast, robust reasoning an
 - **Dynamic Authentication**: Automatically fetches and caches access tokens using default Google credentials (`google-auth`) or the local `gcloud` CLI for seamless development and deployment.
 - **Cloud Run / Agent Engine Ready**: Includes a deployment script to bundle and deploy the application to Vertex AI Agent Engine.
 
+## MCP Server Authentication
+
+The SecOps Agent integrates with the Chronicle MCP Server using the HTTP-based Model Context Protocol. To ensure secure communication, the `McpToolset` dynamically injects an OAuth 2.0 Bearer token into the `Authorization` header of each request.
+
+The authentication flow utilizes a tiered strategy:
+1. **Cloud Run / Agent Engine (Production)**: Attempts to fetch credentials seamlessly via `google.auth.default()`, retrieving standard Google Cloud application default credentials.
+2. **Local Development (Fallback)**: If the standard library fails, falls back to shelling out and executing `gcloud auth print-access-token` to acquire the active user's credentials.
+
+The token is cached locally with a configurable expiration to minimize latency during repeated tool executions, ensuring that requests to `https://chronicle.us.rep.googleapis.com/mcp` are authenticated cleanly and efficiently without needing human intervention.
+
 ## Prerequisites
 
 - Python 3.13+
