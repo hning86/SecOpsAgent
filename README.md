@@ -65,6 +65,21 @@ uv run python client.py
 
 This will run predefined user queries against the SecOps Agent and stream back the assistant's responses.
 
+### Impersonating a Service Account (Optional)
+
+If your personal user identity lacks the necessary permissions and you need to run the agent locally as a specific Google Cloud Service Account, you can configure the `gcloud` CLI to impersonate it. The agent's `TokenManager` will natively inherit this configuration without requiring any code changes.
+
+1. Ensure your user has the **Service Account Token Creator** (`roles/iam.serviceAccountTokenCreator`) role on the target service account.
+2. Set the `gcloud` CLI to impersonate the service account globally:
+   ```bash
+   gcloud config set auth/impersonate_service_account <YOUR_SERVICE_ACCOUNT_EMAIL>
+   ```
+3. Run `client.py` normally. The agent will automatically fetch tokens representing the service account context instead of your personal identity.
+4. When you are finished developing, disable impersonation by running:
+   ```bash
+   gcloud config unset auth/impersonate_service_account
+   ```
+
 ### Example Queries
 
 When interacting with the agent, you can ask questions that leverage both your integrated Google SecOps (Chronicle) environment and general threat intelligence via Google Search. Here are some examples:
