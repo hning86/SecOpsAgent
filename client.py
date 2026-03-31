@@ -29,12 +29,13 @@ async def main():
                 if part.text:
                     print(f"Agent: {part.text}")
 
-    # 2. Test listing Compute machine types
-    print("\nUser: Can you list machine types available in us-central1-a for project secops-dev-488519 that has the most amount of GPUs and more than 16 TB of RAM?")
+    # 2. Test SecOps / Chronicle integration
+    query = "Can you summarize the latest high-severity security alerts from Chronicle for the past 24 hours?"
+    print(f"\nUser: {query}")
     async for event in runner.run_async(
         user_id=user_id,
         session_id=session_id,
-        new_message=types.Content(role="user", parts=[types.Part(text="Can you list all machine types available in us-central1-a for project secops-dev-488519?")])
+        new_message=types.Content(role="user", parts=[types.Part(text=query)])
     ):
         if event.content and event.content.parts:
             for part in event.content.parts:

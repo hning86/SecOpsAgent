@@ -51,14 +51,7 @@ mcp_toolset = McpToolset(
     tool_filter=chronicle_tool_filter
 )
 
-# Compute MCP Toolset
-compute_mcp_toolset = McpToolset(
-    connection_params=StreamableHTTPConnectionParams(
-        url="https://compute.googleapis.com/mcp",
-    ),
-    header_provider=token_manager.get_auth_headers,
-    tool_name_prefix="compute_"
-)
+
 
 # Define the agent with Vertex AI model
 hello_agent = Agent(
@@ -72,7 +65,6 @@ hello_agent = Agent(
     """,
     tools=[
         mcp_toolset, 
-        # compute_mcp_toolset
         GoogleSearchTool(bypass_multi_tools_limit=True)
         ]
 )
