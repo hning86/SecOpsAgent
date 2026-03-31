@@ -28,6 +28,30 @@ To balance performance and reliability, the access token caching logic uses a pr
 - **1-Hour Lifespan**: Fresh tokens fetched via Google Cloud services are assumed to have the standard 3600-second (1 hour) validity window.
 - **10-Minute Buffer**: The cache enforces a 600-second buffer before validating reuse. If a cached token is within 10 minutes of expiring, it is preemptively refreshed instead of reused. This ensures that any token passed to the underlying MCP tools has a generous margin for time-consuming model inferences and network requests, avoiding unanticipated `401 Unauthorized` errors caused by tokens expiring mid-flight.
 
+## Architecture
+
+```mermaid
+graph TD
+    User([Security Analyst]) -->|Queries| Client[Run Environment: Local / Agent Engine]
+    
+    subgraph SecOps Agent Application
+        Client --> App[Google ADK App]
+        App --> Model[Vertex Gemini Model]
+        App --> Tools{Tool Orchestrator}
+        App --> Auth[Token Manager]
+    end
+    
+    Model <-->|Inference| Vertex[Vertex AI Backend]
+    Auth -->|Fetches Access Tokens| GCP_IAM[Google Cloud IAM]
+    Auth -.->|Injects Bearer Token| Tools
+    
+    Tools <-->|HTTP MCP Protocol| Chronicle[Chronicle MCP Server]
+    Tools <-->|Search Queries| Search[Google Search API]
+    
+    Chronicle <-->|SecOps Data| ChronicleDB[(Google SecOps)]
+    Search <-->|Threat Intel| PublicWeb[(Public Web)]
+```
+
 ## Prerequisites
 
 - Python 3.13+
