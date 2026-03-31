@@ -73,7 +73,9 @@ The project contains a `deploy.sh` script to configure and deploy the agent to G
    ```env
    GOOGLE_CLOUD_PROJECT=<YOUR_GCP_PROJECT_ID>
    GOOGLE_CLOUD_LOCATION=us-central1
+   OTEL_INSTRUMENTATION_GENAI_CAPTURE_MESSAGE_CONTENT=true
    ```
+   *Note: The `OTEL_INSTRUMENTATION_GENAI_CAPTURE_MESSAGE_CONTENT=true` telemetry flag enables OpenTelemetry tracing to capture full message inputs and outputs, which is highly recommended for debugging generative AI tool executions.*
 
 2. Run the deployment script:
    ```bash
