@@ -95,8 +95,16 @@ The project contains a `deploy.sh` script to configure and deploy the agent to G
 
 1. Create a `.env` file in the root directory:
    ```env
+   # Vertex AI Config
    GOOGLE_CLOUD_PROJECT=<YOUR_GCP_PROJECT_ID>
    GOOGLE_CLOUD_LOCATION=us-central1
+
+   # Chronicle MCP Config
+   CHRONICLE_PROJECT_ID=<YOUR_CHRONICLE_PROJECT_ID>
+   CHRONICLE_CUSTOMER_ID=<YOUR_CHRONICLE_CUSTOMER_ID>
+   CHRONICLE_REGION=US
+
+   # Telemetry
    OTEL_INSTRUMENTATION_GENAI_CAPTURE_MESSAGE_CONTENT=true
    ```
    *Note: The `OTEL_INSTRUMENTATION_GENAI_CAPTURE_MESSAGE_CONTENT=true` telemetry flag enables OpenTelemetry tracing to capture full message inputs and outputs, which is highly recommended for debugging generative AI tool executions.*

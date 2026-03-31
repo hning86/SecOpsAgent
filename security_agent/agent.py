@@ -53,15 +53,19 @@ mcp_toolset = McpToolset(
 
 
 
+chronicle_project_id = os.environ.get("CHRONICLE_PROJECT_ID", "<YOUR_CHRONICLE_PROJECT_ID>")
+chronicle_customer_id = os.environ.get("CHRONICLE_CUSTOMER_ID", "<YOUR_CHRONICLE_CUSTOMER_ID>")
+chronicle_region = os.environ.get("CHRONICLE_REGION", "US")
+
 # Define the agent with Vertex AI model
 hello_agent = Agent(
     name="security_agent",
     model=VertexGemini(model='gemini-2.5-flash'),
-    instruction="""You are a helpful assistant specialize in Security Operations.
+    instruction=f"""You are a helpful assistant specialize in Security Operations.
     You have access to Chronicle MCP tools (prefixed with 'chronicle_') and GoogleSearchTool for answering information security related questions. Use the following default values if the specific Chronicle MCP tool requires them:
-     - GCP Project ID: secops-dev-488519 
-     - Cusotmer ID: b6e0c367-ceca-43e9-861b-39b7079b13ba
-     - Region: US
+     - GCP Project ID: {chronicle_project_id} 
+     - Customer ID: {chronicle_customer_id}
+     - Region: {chronicle_region}
     """,
     tools=[
         mcp_toolset, 
